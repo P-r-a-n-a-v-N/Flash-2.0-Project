@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalPulse Wellness AI - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #0f0f0f;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .nav-item img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .nav-item.active {
+            background-color: #2a2a2a;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+            width: calc(100% - 220px);
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-icon {
+            background-color: #3a3a3a;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .challenges-section {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .challenges-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .challenges-title {
+            font-size: 18px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+
+        .badges-title {
+            font-size: 16px;
+            color: #ffd700;
+            margin-left: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: #32cd32;
+            color: #000;
+        }
+
+        .tab.completed {
+            background-color: #006400;
+            color: #fff;
+        }
+
+        .challenge-description {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .completed {
+            color: #32cd32;
+            font-size: 14px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .badge {
+            background-color: #3a3a3a;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80px;
+        }
+
+        .badge img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .badge-label {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .badge.unlocked {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .badge.unlocked .badge-label {
+            color: #000;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            background-color: #2a2a2a;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #6a5acd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .feeling {
+            background-color: #2a2a2a;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feeling img {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="https://via.placeholder.com/30/6a5acd/ffffff?text=VP" alt="Logo"> <!-- Placeholder for flame logo -->
+            <div class="logo-text">VitalPulse<br>Wellness AI</div>
+        </div>
+        <div class="nav-item active"><img src="https://via.placeholder.com/20/ffffff/000000?text=H" alt="Home"> Home</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=W" alt="Workout"> Workout</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=M" alt="Meal"> Meal Plan</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=M" alt="Mind"> Mindfulness</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=L" alt="Leader"> Leaderboard</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=C" alt="Clients"> Clients</div>
+        <div class="nav-item"><img src="https://via.placeholder.com/20/ffffff/000000?text=P" alt="Profile"> Profile</div>
+    </div>
+
+    <div class="main-content">
+        <div class="welcome">Welcome back, Pranav</div>
+        <div class="date">Wednesday, February 18, 2026</div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://via.placeholder.com/20/ff7f00/000000?text=F" alt="Flame Icon"></div>
+                <div class="stat-value">1</div>
+                <div class="stat-label">DAY STREAK</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://via.placeholder.com/20/6a5acd/000000?text=B" alt="Bolt Icon"></div>
+                <div class="stat-value">75</div>
+                <div class="stat-label">TOTAL POINTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://via.placeholder.com/20/00bfff/000000?text=W" alt="Water Icon"></div>
+                <div class="stat-value">0 glasses</div>
+                <div class="stat-label">WATER TODAY</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://via.placeholder.com/20/9370db/000000?text=M" alt="Moon Icon"></div>
+                <div class="stat-value">-</div>
+                <div class="stat-label">SLEEP LAST NIGHT</div>
+            </div>
+        </div>
+
+        <div class="challenges-section">
+            <div class="challenges-header">
+                <div class="challenges-title">Today's Challenges</div>
+                <div class="progress">1/3 done</div>
+                <div class="badges-title">Badges</div>
+            </div>
+            <div class="tabs">
+                <div class="tab active">✓ Exercise</div>
+                <div class="tab completed">✓ Meal Tip</div>
+                <div class="tab completed">✓ Mindfulness</div>
+            </div>
+            <div class="challenge-description">
+                Today, focus on gentle resistance exercises to aid muscle recovery. Consider doing a 15-minute full-body stretch routine followed by light bodyweight exercises like wall push-ups and seated leg lifts. Remember to listen to your body and rest when needed!
+            </div>
+            <div class="completed">✓ Completed! +30 points earned</div>
+            <div class="badges">
+                <div class="badge unlocked">
+                    <img src="https://via.placeholder.com/30/ffd700/000000?text=FS" alt="First Step">
+                    <div class="badge-label">First Step</div>
+                </div>
+                <div class="badge unlocked">
+                    <img src="https://via.placeholder.com/30/ffd700/000000?text=3D" alt="3-Day Streak">
+                    <div class="badge-label">3-Day Streak</div>
+                </div>
+                <div class="badge unlocked">
+                    <img src="https://via.placeholder.com/30/ffd700/000000?text=WW" alt="Week Warrior">
+                    <div class="badge-label">Week Warrior</div>
+                </div>
+                <div class="badge unlocked">
+                    <img src="https://via.placeholder.com/30/ffd700/000000?text=MM" alt="Monthly Master">
+                    <div class="badge-label">Monthly Master</div>
+                </div>
+                <div class="badge">
+                    <img src="https://via.placeholder.com/30/aaaaaa/000000?text=C" alt="Centurion">
+                    <div class="badge-label">Centurion</div>
+                </div>
+                <div class="badge">
+                    <img src="https://via.placeholder.com/30/aaaaaa/000000?text=PC" alt="Point Crusher">
+                    <div class="badge-label">Point Crusher</div>
+                </div>
+                <div class="badge">
+                    <img src="https://via.placeholder.com/30/aaaaaa/000000?text=TT" alt="Triple Threat">
+                    <div class="badge-label">Triple Threat</div>
+                </div>
+                <div class="badge">
+                    <img src="https://via.placeholder.com/30/aaaaaa/000000?text=CK" alt="Comeback Kid">
+                    <div class="badge-label">Comeback Kid</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-section">
+            <div class="user-avatar">P</div>
+            <div class="user-info">
+                <div class="user-name">Pranav Neelakandan...</div>
+                <div class="user-email">pranavneelu06@gma...</div>
+            </div>
+        </div>
+
+        <div class="feeling">
+            <img src="https://via.placeholder.com/20/ffffff/000000?text=?" alt="Chat Icon">
+            How are you feeling?
+        </div>
+    </div>
+</body>
+</html>

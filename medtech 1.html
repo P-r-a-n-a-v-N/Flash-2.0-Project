@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitalPulse Wellness AI</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: #0f0f0f;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.nav-item:hover {
+    background-color: #2a2a2a;
+}
+
+.nav-item.active {
+    background-color: #2a2a2a;
+}
+
+.nav-item img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+    width: calc(100% - 240px);
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+/* CHALLENGES */
+.challenges-section,
+.chart-section,
+.recent-workouts {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background-color: #3a3a3a;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90px;
+}
+
+.badge.unlocked {
+    background-color: gold;
+    color: black;
+}
+
+.challenge-description {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.completed {
+    color: #32cd32;
+}
+
+.workout-item {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.intensity {
+    background-color: #ff4500;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.log-button {
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <img src="https://via.placeholder.com/30/6a5acd/ffffff?text=VP">
+        <div class="logo-text">VitalPulse<br>Wellness AI</div>
+    </div>
+
+    <div class="nav-item active" onclick="showSection('home')">Home</div>
+    <div class="nav-item" onclick="showSection('workout')">Workout</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <!-- HOME SECTION -->
+    <div id="home" class="section active">
+        <h2>Welcome back, Pranav</h2>
+        <p id="todayDate"></p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">DAY STREAK</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">75</div>
+                <div class="stat-label">TOTAL POINTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">0</div>
+                <div class="stat-label">WATER (Glasses)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">7h</div>
+                <div class="stat-label">SLEEP</div>
+            </div>
+        </div>
+
+        <div class="challenges-section">
+            <h3>Today's AI Challenge</h3>
+            <div class="challenge-description">
+                Today focus on gentle resistance exercises and 15-minute stretching.
+            </div>
+            <div class="completed">✓ Completed! +30 Points</div>
+
+            <h4>Badges</h4>
+            <div class="badges">
+                <div class="badge unlocked">First Step</div>
+                <div class="badge unlocked">3-Day Streak</div>
+                <div class="badge">Centurion</div>
+                <div class="badge">Point Crusher</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WORKOUT SECTION -->
+    <div id="workout" class="section">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>Workout Tracker</h2>
+            <button class="log-button">+ Log Workout</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">5</div>
+                <div class="stat-label">TOTAL WORKOUTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">130</div>
+                <div class="stat-label">TOTAL MINUTES</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1298</div>
+                <div class="stat-label">CALORIES BURNED</div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h3>This Week's Activity</h3>
+            <canvas id="activityChart"></canvas>
+        </div>
+
+        <div class="recent-workouts">
+            <h3>Recent Workouts</h3>
+            <div class="workout-item">
+                <div style="flex:1;">
+                    <strong>Strength Training</strong><br>
+                    <small>Feb 18, 2026</small>
+                </div>
+                <div>
+                    20 min | 300 cal 
+                    <span class="intensity">Intense</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// SECTION SWITCHING
+function showSection(sectionId) {
+    document.querySelectorAll(".section").forEach(sec => {
+        sec.classList.remove("active");
+    });
+    document.getElementById(sectionId).classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(nav => {
+        nav.classList.remove("active");
+    });
+    event.target.classList.add("active");
+}
+
+// DATE AUTO UPDATE
+document.getElementById("todayDate").innerText =
+    new Date().toDateString();
+
+// CHART
+const ctx = document.getElementById('activityChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Thu','Fri','Sat','Sun','Mon','Tue','Wed'],
+        datasets: [{
+            data: [100,150,50,100,250,300,350],
+            backgroundColor: '#ff7f00'
+        }]
+    },
+    options: {
+        plugins: { legend: { display:false } },
+        scales: {
+            y: { beginAtZero:true }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
